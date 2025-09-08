@@ -3,79 +3,68 @@
 <h1>Gráficos Interactivos</h1>
 
 <p>En esta pestaña, se visualizarán gráficos interactivos basados en los datos abiertos seleccionados sobre los indicadores de la calidad del agua.</p>
-<p>Estos gráficos permitirán realizar un análisis y evaluación de la toma de decisiones, así como promover la mejora continua frente a posibles problemas relacionados con la calidad del agua. Los usuarios podrán explorar las tendencias, identificar áreas de oportunidad y tomar decisiones informadas para mejorar la gestión de los recursos hídricos.</p>
 
-<!-- Menú desplegable para seleccionar gráfico -->
 <label for="grafico-selector">Selecciona un gráfico:</label>
 <select id="grafico-selector">
-    <option value="grafico1">Gráfico 1</option>
-    <option value="grafico2">Gráfico 2</option>
-    <option value="grafico3">Gráfico 3</option>
-    <option value="grafico4">Gráfico 4</option>
-    <option value="grafico5">Gráfico 5</option>
-    <option value="grafico6">Gráfico 6</option>
-    <option value="grafico7">Gráfico 7</option>
-    <option value="grafico8">Gráfico 8</option>
-    <option value="grafico9">Gráfico 9</option>
-    <option value="grafico10">Gráfico 10</option>
+    {% for i in range(1,11) %}
+    <option value="grafico{{ i }}">Gráfico {{ i }}</option>
+    {% endfor %}
 </select>
 
-<!-- Contenedores de los gráficos -->
-<div id="graficos-container">
-    {% for i in range(1,11) %}
-    <div class="grafico" id="grafico{{ i }}" style="display: none;">
-        <div class='tableauPlaceholder' id='vizGrafico{{ i }}' style='position: relative'>
-            <noscript>
-                <a href='#'>
-                    <img alt='Gráfico {{ i }}' 
-                         src='https://public.tableau.com/static/images/Si/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico{{ i }}/1_rss.png' 
-                         style='border: none' />
-                </a>
-            </noscript>
-            <object class='tableauViz' style='display:none;'>
-                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
-                <param name='embed_code_version' value='3' /> 
-                <param name='site_root' value='' />
-                <param name='name' value='SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico{{ i }}' />
-                <param name='tabs' value='no' /> 
-                <param name='toolbar' value='yes' />
-                <param name='static_image' value='https://public.tableau.com/static/images/Si/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico{{ i }}/1.png' /> 
-                <param name='animate_transition' value='yes' />
-                <param name='display_static_image' value='yes' />
-                <param name='display_spinner' value='yes' />
-                <param name='display_overlay' value='yes' />
-                <param name='display_count' value='yes' />
-                <param name='language' value='es-ES' />
-            </object>
-        </div>
-        <script type='text/javascript'>
-            var divElement = document.getElementById('vizGrafico{{ i }}');
-            var vizElement = divElement.getElementsByTagName('object')[0];
-            vizElement.style.width = '100%';
-            vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
-            var scriptElement = document.createElement('script');
-            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-            vizElement.parentNode.insertBefore(scriptElement, vizElement);
-        </script>
-    </div>
-    {% endfor %}
-</div>
+<!-- Contenedor principal para el gráfico -->
+<div id="grafico-container" style="width:100%; height:700px;"></div>
+
+<!-- Script de Tableau (solo una vez) -->
+<script type="text/javascript" src="https://public.tableau.com/javascripts/api/viz_v1.js"></script>
 
 <script>
-    // JavaScript para manejar la visibilidad de los gráficos
-    const graficoSelector = document.getElementById('grafico-selector');
-    const graficos = document.querySelectorAll('.grafico');
+const graficoSelector = document.getElementById('grafico-selector');
+const contenedor = document.getElementById('grafico-container');
 
-    graficoSelector.addEventListener('change', () => {
-        const selectedGrafico = graficoSelector.value;
-        graficos.forEach(grafico => {
-            grafico.style.display = grafico.id === selectedGrafico ? 'block' : 'none';
-        });
+// URLs de los gráficos
+const graficosURLs = {
+    "grafico1": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico1",
+    "grafico2": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico2",
+    "grafico3": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico3",
+    "grafico4": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico4",
+    "grafico5": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico5",
+    "grafico6": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico6",
+    "grafico7": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico7",
+    "grafico8": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico8",
+    "grafico9": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico9",
+    "grafico10": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico10"
+};
+
+// Función para cargar el gráfico seleccionado
+let currentViz = null;
+function cargarGrafico(graficoKey) {
+    // Limpiar contenedor
+    contenedor.innerHTML = "";
+    if(currentViz) currentViz.dispose();
+
+    const url = graficosURLs[graficoKey];
+    const placeholder = document.createElement("div");
+    placeholder.className = "tableauPlaceholder";
+    placeholder.style.width = "100%";
+    placeholder.style.height = "100%";
+    contenedor.appendChild(placeholder);
+
+    currentViz = new tableau.Viz(placeholder, url, {
+        width: "100%",
+        height: "100%",
+        hideTabs: true,
+        hideToolbar: false
     });
+}
 
-    // Mostrar el primer gráfico por defecto
-    graficoSelector.value = 'grafico1';
-    document.getElementById('grafico1').style.display = 'block';
+// Inicializar primer gráfico
+cargarGrafico("grafico1");
+graficoSelector.value = "grafico1";
+
+// Cambiar gráfico al seleccionar
+graficoSelector.addEventListener("change", () => {
+    cargarGrafico(graficoSelector.value);
+});
 </script>
 
 {% endblock %}
