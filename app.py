@@ -4,13 +4,18 @@ import os
 import psycopg2
 from sqlalchemy import create_engine
 
+# Inicializar app Flask
 app = Flask(__name__)
-app.secret_key = 'clave_secreta'
+app.secret_key = os.environ.get("SECRET_KEY", "clave_por_defecto")  # Mejor usar variable de entorno
 
-# Railway provee la variable DATABASE_URL automáticamente
+# DATABASE_URL proporcionada por Railway
 DATABASE_URL = os.getenv("DATABASE_URL", "")
 
-# Railway usa postgres:// pero SQLAlchemy necesita postgresql://
+# Validación para evitar crash
+if not DATABASE_URL:
+    raise RuntimeError("La variable de entorno DATABASE_URL no está configurada")
+
+# Ajuste para SQLAlchemy
 if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
@@ -19,33 +24,29 @@ def get_db_connection():
     conn = psycopg2.connect(DATABASE_URL)
     return conn
 
-# Engine para usar con Pandas (guardar DataFrames en PostgreSQL)
+# Engine para Pandas
 engine = create_engine(DATABASE_URL)
 
-# Ruta de inicio
+# ----------------- RUTAS -----------------
+
 @app.route('/')
 def home():
     return render_template('home.html')
 
-# Ruta de misión y visión
 @app.route('/mision-vision')
 def mision_vision():
     return render_template('mision_vision.html')
 
-# Ruta para cargar datos
 @app.route('/cargar-datos', methods=['GET', 'POST'])
 def cargar_datos():
-    datos = None  # Variable para almacenar los datos desde la base de datos
+    datos = None
 
     if request.method == 'POST':
         file = request.files['file']
         if file:
             try:
-                # Leer el archivo (puede ser .xlsx o .csv)
                 data = pd.read_excel(file) if file.filename.endswith('.xlsx') else pd.read_csv(file)
-
                 if not data.empty:
-                    # Guardar los datos en PostgreSQL con Pandas + SQLAlchemy
                     data.to_sql('calidad_agua', engine, if_exists='replace', index=False)
                     flash('Datos cargados exitosamente', 'success')
                 else:
@@ -54,17 +55,14 @@ def cargar_datos():
                 flash(f'Error al cargar los datos: {e}', 'error')
         return redirect(url_for('cargar_datos'))
 
-    # Recuperar datos desde PostgreSQL si la tabla existe
+    # Recuperar datos desde PostgreSQL si existe la tabla
     try:
         conn = get_db_connection()
         cur = conn.cursor()
         cur.execute("SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_name='calidad_agua');")
-        table_exists = cur.fetchone()[0]
-
-        if table_exists:
+        if cur.fetchone()[0]:
             cur.execute("SELECT * FROM calidad_agua")
             datos = cur.fetchall()
-
         cur.close()
         conn.close()
     except Exception as e:
@@ -72,7 +70,6 @@ def cargar_datos():
 
     return render_template('cargar_datos.html', datos=datos)
 
-# Ruta para eliminar la tabla
 @app.route('/eliminar-tabla', methods=['POST'])
 def eliminar_tabla():
     try:
@@ -88,11 +85,8 @@ def eliminar_tabla():
 
     return redirect(url_for('cargar_datos'))
 
-# Ruta para mostrar gráficos de Tableau
 @app.route('/graficos')
 def graficos():
     return render_template('graficos.html')
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
+# No se necesita if __name__ == '__main__' en Railway, Gunicorn lo maneja
