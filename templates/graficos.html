@@ -2,7 +2,6 @@
 {% block content %}
 <h1>Gráficos Interactivos</h1>
 
-<!-- Descripción de la pestaña -->
 <p>En esta pestaña, se visualizarán gráficos interactivos basados en los datos abiertos seleccionados sobre los indicadores de la calidad del agua.</p>
 <p>Estos gráficos permitirán realizar un análisis y evaluación de la toma de decisiones, así como promover la mejora continua frente a posibles problemas relacionados con la calidad del agua. Los usuarios podrán explorar las tendencias, identificar áreas de oportunidad y tomar decisiones informadas para mejorar la gestión de los recursos hídricos.</p>
 
@@ -23,157 +22,43 @@
 
 <!-- Contenedores de los gráficos -->
 <div id="graficos-container">
-    <!-- Gráfico 1 -->
-    <div class="grafico" id="grafico1" style="display: none;">
-      <div class='tableauPlaceholder' id='viz1757353532266' style='position: relative'>
-        <noscript>
-          <a href='#'>
-            <img alt='Gráfico 1' 
-                 src='https://public.tableau.com/static/images/Si/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico1/1_rss.png' 
-                 style='border: none' />
-          </a>
-        </noscript>
-        <object class='tableauViz' style='display:none;'>
-            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-          <param name='embed_code_version' value='3' />
-          <param name='name' value='SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico1' />
-          <param name='tabs' value='no' />
-          <param name='toolbar' value='yes' />
-          <param name='static_image' value='https://public.tableau.com/static/images/Si/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico1/1.png' />
-          <param name='animate_transition' value='yes' />
-          <param name='display_spinner' value='yes' />
-          <param name='display_overlay' value='yes' />
-          <param name='display_count' value='yes' />
-          <param name='language' value='es-ES' />
-        </object>
-      </div>
-      <script type='text/javascript'>
-        var divElement = document.getElementById('viz1757353532266');
-        var vizElement = divElement.getElementsByTagName('object')[0];
-        vizElement.style.width = '100%';
-        vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
-        var scriptElement = document.createElement('script');
-        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-        vizElement.parentNode.insertBefore(scriptElement, vizElement);
-      </script>
+    {% for i in range(1,11) %}
+    <div class="grafico" id="grafico{{ i }}" style="display: none;">
+        <div class='tableauPlaceholder' id='vizGrafico{{ i }}' style='position: relative'>
+            <noscript>
+                <a href='#'>
+                    <img alt='Gráfico {{ i }}' 
+                         src='https://public.tableau.com/static/images/Si/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico{{ i }}/1_rss.png' 
+                         style='border: none' />
+                </a>
+            </noscript>
+            <object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                <param name='embed_code_version' value='3' /> 
+                <param name='site_root' value='' />
+                <param name='name' value='SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico{{ i }}' />
+                <param name='tabs' value='no' /> 
+                <param name='toolbar' value='yes' />
+                <param name='static_image' value='https://public.tableau.com/static/images/Si/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico{{ i }}/1.png' /> 
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='es-ES' />
+            </object>
+        </div>
+        <script type='text/javascript'>
+            var divElement = document.getElementById('vizGrafico{{ i }}');
+            var vizElement = divElement.getElementsByTagName('object')[0];
+            vizElement.style.width = '100%';
+            vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
+            var scriptElement = document.createElement('script');
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>
     </div>
-
-    <!-- Gráfico 2 -->
-    <div class="grafico" id="grafico2" style="display: none;">
-        <script type="module" src="https://us-east-1.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
-        <tableau-viz 
-            id="tableau-viz" 
-            src="https://us-east-1.online.tableau.com/t/angelicaat1-6b3980f0b3/views/grafico2/grafico2" 
-            width="1536" 
-            height="698" 
-            hide-tabs 
-            toolbar="bottom">
-        </tableau-viz>
-    </div>
-
-    <!-- Gráfico 3 -->
-    <div class="grafico" id="grafico3" style="display: none;">
-        <script type="module" src="https://us-east-1.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
-        <tableau-viz 
-            id="tableau-viz" 
-            src="https://us-east-1.online.tableau.com/t/angelicaat1-6b3980f0b3/views/grafico3/grafico3" 
-            width="1536" 
-            height="698" 
-            hide-tabs 
-            toolbar="bottom">
-        </tableau-viz>
-    </div>
-
-    <!-- Gráfico 4 -->
-    <div class="grafico" id="grafico4" style="display: none;">
-        <script type="module" src="https://us-east-1.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
-        <tableau-viz 
-            id="tableau-viz" 
-            src="https://us-east-1.online.tableau.com/t/angelicaat1-6b3980f0b3/views/grafico4/grafico4" 
-            width="1536" 
-            height="698" 
-            hide-tabs 
-            toolbar="bottom">
-        </tableau-viz>
-    </div>
-
-    <!-- Gráfico 5 -->
-    <div class="grafico" id="grafico5" style="display: none;">
-        <script type="module" src="https://us-east-1.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
-        <tableau-viz 
-            id="tableau-viz" 
-            src="https://us-east-1.online.tableau.com/t/angelicaat1-6b3980f0b3/views/grafico5/grafico5" 
-            width="1536" 
-            height="698" 
-            hide-tabs 
-            toolbar="bottom">
-        </tableau-viz>
-    </div>
-
-    <!-- Gráfico 6 -->
-    <div class="grafico" id="grafico6" style="display: none;">
-        <script type="module" src="https://us-east-1.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
-        <tableau-viz 
-            id="tableau-viz" 
-            src="https://us-east-1.online.tableau.com/t/angelicaat1-6b3980f0b3/views/grafica6/grafico6" 
-            width="1536" 
-            height="698" 
-            hide-tabs 
-            toolbar="bottom">
-        </tableau-viz>
-    </div>
-
-    <!-- Gráfico 7 -->
-    <div class="grafico" id="grafico7" style="display: none;">
-        <script type="module" src="https://us-east-1.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
-        <tableau-viz 
-            id="tableau-viz" 
-            src="https://us-east-1.online.tableau.com/t/angelicaat1-6b3980f0b3/views/grafica7/grafico7" 
-            width="1536" 
-            height="698" 
-            hide-tabs 
-            toolbar="bottom">
-        </tableau-viz>
-    </div>
-
-    <!-- Gráfico 8 -->
-    <div class="grafico" id="grafico8" style="display: none;">
-        <script type="module" src="https://us-east-1.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
-        <tableau-viz 
-            id="tableau-viz" 
-            src="https://us-east-1.online.tableau.com/t/angelicaat1-6b3980f0b3/views/grafico8/grafico8" 
-            width="1536" 
-            height="698" 
-            hide-tabs 
-            toolbar="bottom">
-        </tableau-viz>
-    </div>
-
-    <!-- Gráfico 9 -->
-    <div class="grafico" id="grafico9" style="display: none;">
-        <script type="module" src="https://us-east-1.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
-        <tableau-viz 
-            id="tableau-viz" 
-            src="https://us-east-1.online.tableau.com/t/angelicaat1-6b3980f0b3/views/grafico9/grafico9" 
-            width="1536" 
-            height="698" 
-            hide-tabs 
-            toolbar="bottom">
-        </tableau-viz>
-    </div>
-
-    <!-- Gráfico 10 -->
-    <div class="grafico" id="grafico10" style="display: none;">
-        <script type="module" src="https://us-east-1.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
-        <tableau-viz 
-            id="tableau-viz-2" 
-            src="https://us-east-1.online.tableau.com/t/angelicaat1-6b3980f0b3/views/grafico10/grafico10" 
-            width="1536" 
-            height="698" 
-            hide-tabs 
-            toolbar="bottom">
-        </tableau-viz>
-    </div>
+    {% endfor %}
 </div>
 
 <script>
@@ -194,5 +79,6 @@
 </script>
 
 {% endblock %}
+
 
 
