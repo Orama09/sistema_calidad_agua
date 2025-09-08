@@ -21,37 +21,29 @@
 const graficoSelector = document.getElementById('grafico-selector');
 const contenedor = document.getElementById('grafico-container');
 
-// URLs de los gráficos
+// URLs de los gráficos (embed code)
 const graficosURLs = {
-    "grafico1": "https://public.tableau.com/shared/6BQWHKWMP?:display_count=n&:origin=viz_share_link",
-    "grafico2": "https://public.tableau.com/shared/QWKRHW9RP?:display_count=n&:origin=viz_share_link",
-    "grafico3": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico3",
-    "grafico4": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico4",
-    "grafico5": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico5",
-    "grafico6": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico6",
-    "grafico7": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico7",
-    "grafico8": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico8",
-    "grafico9": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico9",
-    "grafico10": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico10"
+    "grafico1": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico1?:embed=y&:showVizHome=no&:display_count=n",
+    "grafico2": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico2?:embed=y&:showVizHome=no&:display_count=n",
+    "grafico3": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico3?:embed=y&:showVizHome=no&:display_count=n",
+    "grafico4": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico4?:embed=y&:showVizHome=no&:display_count=n",
+    "grafico5": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico5?:embed=y&:showVizHome=no&:display_count=n",
+    "grafico6": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico6?:embed=y&:showVizHome=no&:display_count=n",
+    "grafico7": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico7?:embed=y&:showVizHome=no&:display_count=n",
+    "grafico8": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico8?:embed=y&:showVizHome=no&:display_count=n",
+    "grafico9": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico9?:embed=y&:showVizHome=no&:display_count=n",
+    "grafico10": "https://public.tableau.com/views/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico10?:embed=y&:showVizHome=no&:display_count=n"
 };
 
-// Función para cargar el gráfico seleccionado
 let currentViz = null;
+
+// Función para cargar el gráfico seleccionado
 function cargarGrafico(graficoKey) {
-    // Limpiar contenedor
-    contenedor.innerHTML = "";
-    if(currentViz) currentViz.dispose();
+    if(currentViz) currentViz.dispose(); // Elimina el gráfico anterior
 
-    const url = graficosURLs[graficoKey];
-    const placeholder = document.createElement("div");
-    placeholder.className = "tableauPlaceholder";
-    placeholder.style.width = "100%";
-    placeholder.style.height = "100%";
-    contenedor.appendChild(placeholder);
-
-    currentViz = new tableau.Viz(placeholder, url, {
+    currentViz = new tableau.Viz(contenedor, graficosURLs[graficoKey], {
         width: "100%",
-        height: "100%",
+        height: "700px",
         hideTabs: true,
         hideToolbar: false
     });
@@ -68,6 +60,8 @@ graficoSelector.addEventListener("change", () => {
 </script>
 
 {% endblock %}
+
+
 
 
 
