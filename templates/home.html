@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="/static/css/styles.css">
+
+    <h1>Bienvenido al Sistema de Monitoreo y Análisis de Calidad del Agua!</h1> 
+    <p>Este sistema permite cargar, analizar y visualizar datos relacionados con la calidad del agua por medio de graficos interactivos para la toma de desiciones.</p>
+
+    <div class="carrusel">
+        <div class="carrusel-contenedor">
+            <img src="{{ url_for('static', filename='images/img1.png') }}" alt="Imagen 1">
+            <img src="{{ url_for('static', filename='images/img2.png') }}" alt="Imagen 2">
+            <img src="{{ url_for('static', filename='images/img3.png') }}" alt="Imagen 3">
+            <img src="{{ url_for('static', filename='images/img4.png') }}" alt="Imagen 4">
+            <!--Duplicación para continuidad-->
+            <img src="{{ url_for('static', filename='images/img1.png') }}" alt="Imagen 1">
+            <img src="{{ url_for('static', filename='images/img2.png') }}" alt="Imagen 2">
+            <img src="{{ url_for('static', filename='images/img3.png') }}" alt="Imagen 3">
+            <img src="{{ url_for('static', filename='images/img4.png') }}" alt="Imagen 4">
+        </div>
+	</div>
+    
+    <h2>Indicadores de calidad superficial</h2>
+    <p>Los Indicadores de calidad del agua son una herramienta cuantitativa que utiliza la Gerencia de Calidad de Agua de la Conagua para determinar cómo se encuentra la calidad del agua en diversos sitios de los cuerpos de agua nacionales, clasificados como lóticos, lénticos, costeros o subterráneos.</p>
+    <p>Se determinan a partir de los resultados del monitoreo nacional que lleva a cabo la Red Nacional de Medición de la Calidad del Agua (RENAMECA), operada por la Gerencia de Calidad del Agua, de la Subdirección General Técnica.</p>
+
+    <img src="/static/images/imagen1.png" alt="Indicadores de calidad del agua" />
+
+    <h2>Cálculo de los Indicadores de calidad del agua superficial</h2>
+    <p>Los Indicadores se calculan mediante estadísticos de tendencia central.</p>
+    <p>Para la Demanda Bioquímica de Oxígeno (DBO), Demanda Química de Oxígeno (DQO), Sólidos Suspendidos Totales (SST), Coliformes fecales (CF), Enterococos fecales (ENTEROC), Escherichia coli (E_COLI), y Porcentaje de saturación de oxígeno disuelto (OD%), se aplica el estadístico de mediana.</p>
+    <p>Para la Toxicidad aguda, se obtiene el máximo de las toxicidades determinadas con Daphnia magna y Vibrio fischeri.</p>
+
+    <h2>Escala de clasificación de la calidad de agua superficial,cuerpos de agua lóticos (ríos, arroyos y corrientes)</h2>
+
+    <img src="/static/images/imagen2.png" alt="Indicadores de calidad del agua" />
+
+    <p>La escala de clasificación para cuerpos de agua lóticos se refiere a la evaluación de la calidad del agua en ríos, arroyos y corrientes de flujo constante. Se enfoca en parámetros como la velocidad del flujo, los niveles de oxígeno disuelto, la concentración de contaminantes y la biodiversidad acuática. Esta clasificación ayuda a determinar si el agua es apta para consumo, uso agrícola, recreativo o para la vida acuática.</p>
+
+    <h2>Escala de clasificación de la calidad de agua superficial,cuerpos de agua lénticos (embalses y presas)</h2>
+
+    <img src="/static/images/imagen3.png" alt="Indicadores de calidad del agua" />
+
+    <p>En los cuerpos de agua lénticos, como embalses y presas, la calidad del agua se evalúa tomando en cuenta factores como la temperatura, la concentración de nutrientes (como nitrógeno y fósforo) y la cantidad de sólidos suspendidos. Estos cuerpos de agua suelen ser más estancados y susceptibles a la acumulación de contaminantes, lo que puede afectar tanto la biodiversidad acuática como el uso humano, como la potabilización y el riego.</p>
+
+    <h2>Escala de clasificación de la calidad de agua superficial,cuerpos de agua costeros.</h2>
+
+    <img src="/static/images/imagen4.png" alt="Indicadores de calidad del agua" />
+
+    <p>La calidad del agua en los cuerpos de agua costeros, como playas, bahías y estuarios, se clasifica según parámetros como la salinidad, la concentración de nutrientes, la temperatura, la presencia de contaminantes y la salud de los ecosistemas marinos. Esta clasificación es esencial para proteger la biodiversidad marina, garantizar la seguridad de las actividades recreativas y asegurar la calidad del agua para consumo humano y pesquerías.</p>
+
+    <h2>Calificación de sitios superficiales con el Semáforo de calidad del agua</h2>
+
+    <img src="/static/images/imagen5.png" alt="Indicadores de calidad del agua" />
+
+{% endblock %}

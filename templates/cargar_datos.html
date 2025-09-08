@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Cargar Datos</title>
+</head>
+<body>
+    {% block content %}
+    <h1 class="title">Cargar Datos</h1>
+
+    <!-- Mostrar mensajes flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Formulario para cargar archivo -->
+    <div class="cargar-datos-container">
+        <form method="POST" enctype="multipart/form-data">
+            <label for="file">Selecciona un archivo CSV o Excel:</label>
+            <input type="file" name="file" id="file" required>
+            <button type="submit">Cargar</button>
+        </form>
+    </div>
+
+    <!-- Mostrar los datos cargados en una tabla -->
+    {% if datos %}
+    <div class="tabla-container">
+        <h2 class="subtitle">Datos Cargados</h2>
+        <div class="tabla-scroll">
+            <table border="1">
+                <thead>
+                    <tr>
+                        {% for column in datos[0].keys() %}
+                            <th>{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in datos %}
+                        <tr>
+                            {% for value in row %}
+                                <td>{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% else %}
+        <p>No hay datos para mostrar.</p>
+    {% endif %}
+
+    <!-- Botón para eliminar la tabla -->
+    <div class="eliminar-tabla-container">
+        <form method="POST" action="{{ url_for('eliminar_tabla') }}">
+            <button type="submit" class="eliminar-btn">Eliminar Tabla</button>
+        </form>
+    </div>
+    
+    {% endblock %}
+
+    <!-- Incluir el script -->
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
