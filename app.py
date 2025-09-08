@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import pandas as pd
 import os
 import psycopg2
+import psycopg2.extras
 from sqlalchemy import create_engine
 
 # Inicializar app Flask
@@ -19,7 +20,7 @@ if not DATABASE_URL:
 if DATABASE_URL.startswith("postgres://"):
     DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
-# Conexión básica con psycopg2
+# Conexión básica con psycopg2 usando diccionario
 def get_db_connection():
     conn = psycopg2.connect(DATABASE_URL)
     return conn
@@ -58,9 +59,15 @@ def cargar_datos():
     # Recuperar datos desde PostgreSQL si existe la tabla
     try:
         conn = get_db_connection()
-        cur = conn.cursor()
-        cur.execute("SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_name='calidad_agua');")
-        if cur.fetchone()[0]:
+        # Cursor tipo diccionario
+        cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+        cur.execute("""
+            SELECT EXISTS (
+                SELECT FROM information_schema.tables 
+                WHERE table_name='calidad_agua'
+            );
+        """)
+        if cur.fetchone()['exists']:
             cur.execute("SELECT * FROM calidad_agua")
             datos = cur.fetchall()
         cur.close()
