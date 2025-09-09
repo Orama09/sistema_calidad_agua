@@ -22,6 +22,7 @@ main {
     position: relative;
     padding: 0.8rem 1rem;
     overflow: hidden; /* Para que la imagen no se desborde */
+    background-color: transparent; /* Permite ver el pseudo-elemento */
 }
 
 /* ===== Fondo con imagen y degradado combinado ===== */
@@ -37,8 +38,8 @@ main {
         url("{{ url_for('static', filename='images/agua.png') }}") no-repeat center center;
     background-size: cover;
     background-blend-mode: overlay; /* Mezcla imagen y degradado */
-    pointer-events: none; /* No bloquea interacción con el menú */
-    z-index: 0;
+    pointer-events: none;
+    z-index: -1; /* Detrás de todo el contenido */
 }
 
 /* ===== Logo / marca ===== */
@@ -139,6 +140,7 @@ main {
 }
 
 .cargar-datos-container form {
+    display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 1rem;
@@ -341,10 +343,3 @@ footer strong {
     padding: 5px;
     font-size: 16px;
 }
-
-
-
-
-
-
-
