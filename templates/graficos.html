@@ -26,81 +26,48 @@ Los usuarios podrán explorar las tendencias, identificar áreas de oportunidad 
 <div id="graficos-container">
 
     <!-- Gráfico 1 -->
-    <div class="grafico" id="grafico1">
-        <div class='tableauPlaceholder' id='viz1757367034143' style='position: relative'>
-            <noscript>
-                <a href='#'>
-                    <img alt=' ' src='https://public.tableau.com/static/images/Si/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico1/1_rss.png' style='border: none' />
-                </a>
-            </noscript>
+    <div class="grafico" id="grafico1" style="display: none;">
+        <div class="tableauPlaceholder">
             <object class='tableauViz'>
                 <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
                 <param name='embed_code_version' value='3' />
                 <param name='name' value='SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico1' />
                 <param name='tabs' value='no' />
                 <param name='toolbar' value='yes' />
-                <param name='static_image' value='https://public.tableau.com/static/images/Si/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico1/1.png' />
-                <param name='animate_transition' value='yes' />
-                <param name='display_static_image' value='yes' />
-                <param name='display_spinner' value='yes' />
-                <param name='display_overlay' value='yes' />
-                <param name='display_count' value='yes' />
                 <param name='language' value='es-ES' />
             </object>
         </div>
     </div>
 
     <!-- Gráfico 2 -->
-    <div class="grafico" id="grafico2">
-        <div class='tableauPlaceholder' id='viz1757367395808' style='position: relative'>
-            <noscript>
-                <a href='#'>
-                    <img alt=' ' src='https://public.tableau.com/static/images/Si/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico2/1_rss.png' style='border: none' />
-                </a>
-            </noscript>
+    <div class="grafico" id="grafico2" style="display: none;">
+        <div class="tableauPlaceholder">
             <object class='tableauViz'>
                 <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
                 <param name='embed_code_version' value='3' />
                 <param name='name' value='SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico2' />
                 <param name='tabs' value='no' />
                 <param name='toolbar' value='yes' />
-                <param name='static_image' value='https://public.tableau.com/static/images/Si/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico2/1.png' />
-                <param name='animate_transition' value='yes' />
-                <param name='display_static_image' value='yes' />
-                <param name='display_spinner' value='yes' />
-                <param name='display_overlay' value='yes' />
-                <param name='display_count' value='yes' />
                 <param name='language' value='es-ES' />
             </object>
         </div>
     </div>
 
     <!-- Gráfico 3 -->
-    <div class="grafico" id="grafico3">
-        <div class='tableauPlaceholder' id='viz1757367434316' style='position: relative'>
-            <noscript>
-                <a href='#'>
-                    <img alt=' ' src='https://public.tableau.com/static/images/Si/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico3/1_rss.png' style='border: none' />
-                </a>
-            </noscript>
+    <div class="grafico" id="grafico3" style="display: none;">
+        <div class="tableauPlaceholder">
             <object class='tableauViz'>
                 <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
                 <param name='embed_code_version' value='3' />
                 <param name='name' value='SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico3' />
                 <param name='tabs' value='no' />
                 <param name='toolbar' value='yes' />
-                <param name='static_image' value='https://public.tableau.com/static/images/Si/SistemadeMonitoreoyAnalisisdelaCalidaddelAgua/grafico3/1.png' />
-                <param name='animate_transition' value='yes' />
-                <param name='display_static_image' value='yes' />
-                <param name='display_spinner' value='yes' />
-                <param name='display_overlay' value='yes' />
-                <param name='display_count' value='yes' />
                 <param name='language' value='es-ES' />
             </object>
         </div>
     </div>
 
-    <!-- Pendientes de integrar -->
+    <!-- Pendientes -->
     <div class="grafico" id="grafico4" style="display: none;"></div>
     <div class="grafico" id="grafico5" style="display: none;"></div>
     <div class="grafico" id="grafico6" style="display: none;"></div>
@@ -113,8 +80,8 @@ Los usuarios podrán explorar las tendencias, identificar áreas de oportunidad 
 <!-- Script de Tableau -->
 <script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script>
 
+<!-- Script para mostrar gráficos -->
 <script>
-    // JavaScript para manejar la visibilidad de los gráficos
     const graficoSelector = document.getElementById('grafico-selector');
     const graficos = document.querySelectorAll('.grafico');
 
@@ -131,6 +98,7 @@ Los usuarios podrán explorar las tendencias, identificar áreas de oportunidad 
 </script>
 
 {% endblock %}
+
 
 
 
