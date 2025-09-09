@@ -21,7 +21,8 @@ main {
 }
 
 .navbar-brand img {
-    height: 55px;
+    height: 80px;
+    width: auto;
     transition: transform 0.2s ease;
 }
 
@@ -276,5 +277,6 @@ footer strong {
     padding: 5px;
     font-size: 16px;
 }
+
 
 
