@@ -1,28 +1,38 @@
 /* Estilos globales */
 body {
-    font-family: 'Roboto', sans-serif;  /* Nueva fuente profesional */
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f7f6;
 }
 
-nav {
-    background-color: #0056b3;
-    padding: 1rem;
-    width: 100%;
+/* Navbar mejorada con Bootstrap */
+.navbar {
+    background-color: #0056b3 !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-nav a {
-    color: white;
+.navbar-brand {
+    font-weight: bold;
+    color: #fff !important;
+}
+
+.navbar-nav .nav-link {
+    color: white !important;
     margin-right: 1rem;
-    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
+.navbar-nav .nav-link:hover {
+    color: #ffd700 !important; /* Amarillo suave */
+}
+
+/* Contenido principal */
 main {
     padding: 2rem;
-    padding-top: 3rem; /* Para evitar que el carrusel tape contenido */
-    max-width: 1200px; /* Limitar el ancho de la interfaz */
-    margin: 0 auto; /* Centrar el contenido */
+    padding-top: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* Contenedor principal para cargar datos */
@@ -36,9 +46,8 @@ main {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos para el formulario */
+/* Formularios */
 .cargar-datos-container form {
-    
     flex-direction: column;
     align-items: center;
     margin-bottom: 1rem;
@@ -68,37 +77,34 @@ main {
     background-color: #003f8a;
 }
 
-/* Contenedor para la tabla */
+/* Tabla */
 .tabla-container {
     margin-top: 20px;
 }
 
-/* Scroll para la tabla */
 .tabla-scroll {
-    max-height: 400px; /* Ajusta la altura máxima según necesidad */
-    overflow-y: auto; /* Habilita desplazamiento vertical */
+    max-height: 400px;
+    overflow-y: auto;
     border: 1px solid #ccc;
 }
 
-/* Estilo de la tabla */
 table {
     width: 100%;
-    max-width: 700px; /* Limitar el ancho máximo de la tabla */
-    margin: 0 auto; /* Centrar la tabla */
+    max-width: 700px;
+    margin: 0 auto;
     border-collapse: collapse;
-    background-color: #ffffff;  /* Fondo blanco para la tabla */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Agregar sombra sutil */
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    overflow: hidden;  /* Esquinas redondeadas */
+    overflow: hidden;
 }
 
-/* Ajuste del padding de las celdas */
 table th, 
 table td {
     border: 1px solid #ddd;
-    padding: 0.5rem; /* Reducir el padding para hacer las celdas más pequeñas */
+    padding: 0.5rem;
     text-align: left;
-    font-size: 0.9rem; /* Reducir el tamaño de la fuente */
+    font-size: 0.9rem;
 }
 
 table th {
@@ -113,11 +119,10 @@ table tr:nth-child(even) {
 }
 
 table tr:hover {
-    background-color: #e9ecef; /* Efecto hover en las filas */
+    background-color: #e9ecef;
 }
 
-
-/* Botón para eliminar la tabla */
+/* Botón eliminar */
 .eliminar-btn {
     margin-top: 20px;
     padding: 0.5rem 1rem;
@@ -134,7 +139,7 @@ table tr:hover {
     background-color: #c9302c;
 }
 
-/* Estilos de mensajes flash */
+/* Mensajes flash */
 .success {
     color: #28a745;
     background-color: #d4edda;
@@ -153,15 +158,15 @@ table tr:hover {
     border-radius: 5px;
 }
 
-/* Estilos para las imágenes */
+/* Imágenes */
 img {
     display: block;
     margin: 20px auto;
-    max-width: 50%; /* Limita el tamaño máximo de las imágenes */
+    max-width: 50%;
     height: auto;
 }
 
-/* Estilo para los párrafos */
+/* Párrafos */
 p {
     font-size: 1.1rem;
     line-height: 1.6;
@@ -170,7 +175,7 @@ p {
     margin-bottom: 1.5rem;
 }
 
-/* Estilos para los encabezados */
+/* Encabezados */
 h2 {
     font-size: 1.8rem;
     color: #0056b3;
@@ -186,66 +191,64 @@ h1 {
     text-align: center;
 }
 
-/* Estilos para el carrusel */
+/* Carrusel */
 .carrusel {
     position: relative;
     width: 100%;
-    max-width: 1000px; /* Ajusta según tu preferencia */
+    max-width: 1000px;
     overflow: hidden;
     margin: auto;
 }
 
 .carrusel-contenedor {
     display: flex;
-    gap: 10px; /* Espacio entre imágenes */
-    animation: deslizar 20s infinite linear; /* Duración ajustable */
+    gap: 10px;
+    animation: deslizar 20s infinite linear;
 }
 
 .carrusel-contenedor img {
-    width: 100%; /* Las imágenes ocupan el ancho completo del contenedor */
+    width: 100%;
     flex-shrink: 0;
-    transition: transform 0.5s ease-in-out; /* Suaviza la transición */
+    transition: transform 0.5s ease-in-out;
 }
 
-/* Animación para deslizar las imágenes */
 @keyframes deslizar {
     0% { transform: translateX(0); }
     100% { transform: translateX(calc(-200% - 40px)); }
 }
 
-/* Estilos para el pie de página */
+/* Footer */
 .footer {
-    background-color: #f8f9fa; /* Color de fondo claro */
-    padding: 20px 0; /* Espaciado arriba y abajo */
-    position: fixed; /* Fijar el pie de página en la parte inferior */
-    width: 100%; /* Asegura que ocupe todo el ancho de la pantalla */
-    bottom: 0; /* Fija el pie de página al final de la página */
-    text-align: center; /* Centra el contenido del pie de página */
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera en la parte superior */
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    text-align: center;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .footer p {
-    margin: 5px 0; /* Espaciado entre las líneas de texto */
-    color: #6c757d; /* Color de texto gris */
+    margin: 5px 0;
+    color: #6c757d;
 }
 
 .footer strong {
-    color: #000; /* Color de texto en negritas */
+    color: #000;
 }
 
-/* Contenedor principal */
+/* Gráficos responsivos */
 #graficos-container {
     margin-top: 20px;
 }
 
-/* Ajuste de gráficos responsivos */
 .tableauPlaceholder, .tableauViz {
     width: 100% !important;
-    height: 80vh !important; /* Ocupa 80% de la pantalla */
+    height: 80vh !important;
     max-height: 1000px;
 }
 
-/* Espaciado del selector */
+/* Selector */
 #grafico-selector {
     margin: 10px 0 20px 0;
     padding: 5px;
