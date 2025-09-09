@@ -233,3 +233,21 @@ h1 {
     color: #000; /* Color de texto en negritas */
 }
 
+/* Contenedor principal */
+#graficos-container {
+    margin-top: 20px;
+}
+
+/* Ajuste de gráficos responsivos */
+.tableauPlaceholder, .tableauViz {
+    width: 100% !important;
+    height: 80vh !important; /* Ocupa 80% de la pantalla */
+    max-height: 1000px;
+}
+
+/* Espaciado del selector */
+#grafico-selector {
+    margin: 10px 0 20px 0;
+    padding: 5px;
+    font-size: 16px;
+}
